@@ -26,14 +26,14 @@ router.get(
 
 router.post(
   '/contacts',
-  validateBody(createStudentSchema),
+  validateBody(createContactSchema),
   ctrlWrapper(createContactController),
 );
 
 router.patch(
   '/contacts/:contactId',
   isValidId,
-  validateBody(updateStudentSchema),
+  validateBody(updateContactSchema),
   ctrlWrapper(patchContactController),
 );
 

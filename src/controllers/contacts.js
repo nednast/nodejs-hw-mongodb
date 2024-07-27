@@ -6,6 +6,10 @@ import {
   deleteContact,
 } from '../services/contacts.js';
 import createHttpError from 'http-errors';
+import {
+  parsePaginationParams,
+  parseSortParams,
+} from '../utils/parsePaginationParams.js';
 
 export const getConactsController = async (req, res) => {
   const contacts = await getAllContacts();
@@ -68,4 +72,30 @@ export const deleteContactController = async (req, res, next) => {
   }
 
   res.status(204).send();
+};
+
+export const getContactsController = async (req, res) => {
+  const { page, perPage } = parsePaginationParams(req.query);
+  const { sortBy, sortOrder } = parseSortParams(req.query);
+
+  const contacts = await getAllStudents({
+    page,
+    perPage,
+    sortBy,
+    sortOrder,
+  });
+
+  res.json({
+    status: 200,
+    message: 'Successfully found contacts!',
+    data: {
+      data: contacts,
+      page: 2,
+      perPage: 4,
+      totalItems: 6,
+      totalPages: 2,
+      hasPreviousPage: true,
+      hasNextPage: false,
+    },
+  });
 };
