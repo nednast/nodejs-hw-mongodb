@@ -40,7 +40,7 @@ const parseSortBy = (sortBy) => {
     'contactType',
   ];
 
-  if (keysOfStudent.includes(sortBy)) {
+  if (keysOfContact.includes(sortBy)) {
     return sortBy;
   }
 
