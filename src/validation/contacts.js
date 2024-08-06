@@ -9,7 +9,7 @@ export const createContactSchema = Joi.object({
     .valid('work', 'home', 'personal')
     .default('personal')
     .required(),
-  parentId: Joi.string().required(),
+  userId: Joi.string().required(),
 });
 
 export const updateContactSchema = Joi.object({
