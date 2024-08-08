@@ -7,6 +7,9 @@ import { env } from './utils/env.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import cookieParser from 'cookie-parser';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const PORT = Number(env('PORT', '3000'));
 
@@ -64,6 +67,12 @@ export const setupServer = () => {
   //     error: err.message,
   //   });
   // });
+
+  app.use((req, res, next) => {
+    console.log(`Time: ${new Date().toLocaleString()}`);
+    next();
+  });
+
   app.use(router);
   app.use('*', notFoundHandler);
 
